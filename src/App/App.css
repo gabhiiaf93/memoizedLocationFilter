@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap");
 
 .parent-container {
   display: flex;
@@ -11,13 +11,10 @@
   background-color: lightgray;
   align-items: space-around;
 }
-.filters {
-  display: flex;
-  justify-content: space-around;
-}
 
-body, html {
-    font-family: 'Roboto', sans-serif;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
+body,
+html {
+  font-family: "Roboto", sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }

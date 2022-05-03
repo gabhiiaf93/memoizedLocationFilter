@@ -6,11 +6,16 @@ import { ListItems } from "./components/list-items";
 import { loc, alphabets } from "./data";
 import { filterCitiesAndCountries, limitTheNumberOfCalls } from "./helper";
 import { ClearAllSelection } from "./components/clear-all";
+import { MainNavMenu } from "./components/main-nav-menu";
 
 function App() {
   const optimizedHandler = useRef(null);
+  // Maybe can use useContext and create a singluar state for these but not
+  // absolutely needed as we are not drilling through a lot of components
   const [cityCountries, updateCityCountries] = useState([]);
   const [selectedLoc, updateSelectedLoc] = useState({});
+  const [isMinimised, updateIsMinimised] = useState(false);
+  const [isCollapsed, updateIsCollapsed] = useState(false);
 
   useEffect(() => {
     updateCityCountries(loc);
@@ -33,16 +38,11 @@ function App() {
   };
   return (
     <div className="parent-container">
-      <div className="filters">
-        <div>
-          <h4>Locations</h4>
-        </div>
-        <div>Filter Icon</div>
-      </div>
+      <MainNavMenu isMinimised={isMinimised} isCollapsed={isCollapsed} />
       <MemoizedSearchBox onSearchHandler={optimizedHandler.currnet} />
       <ClearAllSelection clearSelectionHandler={clearSelectionHandler} />
       <div
-        style={{
+        className={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-around",
