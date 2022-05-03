@@ -2,3 +2,8 @@
   display: flex;
   justify-content: space-between;
 }
+.icons {
+  display: flex;
+  width: 40px;
+  justify-content: space-between;
+}
