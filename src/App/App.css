@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+
+.parent-container {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  justify-content: flex-start;
+  height: 500px;
+  padding: 20px;
+  border: 1px solid gray;
+  background-color: lightgray;
+  align-items: space-around;
+}
+.filters {
+  display: flex;
+  justify-content: space-around;
+}
+
+body, html {
+    font-family: 'Roboto', sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
