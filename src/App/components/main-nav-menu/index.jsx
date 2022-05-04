@@ -4,7 +4,7 @@ export const MainNavMenu = ({ isCollapsed, isMinimised, onClickHandler }) => {
   return (
     <div className="filters">
       <div>
-        <h4>Locations</h4>
+        <h4 className={isCollapsed ? 'verticalPosition' : ''}>Locations</h4>
       </div>
       <div className="icons">
         <div>

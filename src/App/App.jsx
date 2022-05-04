@@ -10,6 +10,7 @@ import { MainNavMenu } from "./components/main-nav-menu";
 import { RESIZE_TYPES } from "./constant";
 function App() {
   const optimizedHandler = useRef(null);
+  const specialStyle = useRef("");
   // Maybe can use useContext and create a singluar state for these but not
   // absolutely needed as we are not drilling through a lot of components
   const [cityCountries, updateCityCountries] = useState([]);
@@ -59,8 +60,12 @@ function App() {
   const clearSelectionHandler = () => {
     updateSelectedLoc({});
   };
+  const showSpecialStyle = isCollapsed || isMinimised;
+  if(showSpecialStyle) {
+    specialStyle.currnet = isCollapsed ? "parentCollapsed" : "parentMinimised";
+  } 
   return (
-    <div className="parent-container">
+    <div className={`parentContainer ${showSpecialStyle ? specialStyle.currnet : ''}` }>
       <MainNavMenu
         isMinimised={isMinimised}
         isCollapsed={isCollapsed}

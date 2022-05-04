@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap");
 
-.parent-container {
+.parentContainer {
   display: flex;
   flex-direction: column;
   width: 300px;
@@ -24,4 +24,11 @@ html {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+}
+.parentCollapsed {
+  width: 100px;
+  height: 170px
+}
+.parentMinimised{
+  height: 52px
 }
