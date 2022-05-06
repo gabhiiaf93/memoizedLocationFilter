@@ -4,8 +4,9 @@
   display: flex;
   flex-direction: column;
   width: 300px;
+  overflow: hidden;
   justify-content: flex-start;
-  height: 500px;
+  height: 400px;
   padding: 20px;
   border: 1px solid gray;
   background-color: lightgray;
@@ -31,4 +32,10 @@ html {
 }
 .parentMinimised{
   height: 52px
+}
+.parentInteractor {
+  display: flex;
+}
+.clearSecAndList {
+  flex: 3;
 }

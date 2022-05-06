@@ -3,10 +3,11 @@ import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import { MemoizedSearchBox } from "./components/search-box";
 import { ListItems } from "./components/list-items";
-import { loc, alphabets } from "./data";
-import { filterCitiesAndCountries, limitTheNumberOfCalls } from "./helper";
+import { loc } from "./data";
+import { filterCitiesAndCountries, limitTheNumberOfCalls, getAnchorLinksData } from "./helper";
 import { ClearAllSelection } from "./components/clear-all";
 import { MainNavMenu } from "./components/main-nav-menu";
+import { AnchorLinkList } from "./components/anchor-list";
 import { RESIZE_TYPES } from "./constant";
 function App() {
   const optimizedHandler = useRef(null);
@@ -14,18 +15,22 @@ function App() {
   // Maybe can use useContext and create a singluar state for these but not
   // absolutely needed as we are not drilling through a lot of components
   const [cityCountries, updateCityCountries] = useState([]);
+  const [anchorLinks, updateAnchorLinks] = useState([]);
   const [selectedLoc, updateSelectedLoc] = useState({});
   const [isMinimised, updateIsMinimised] = useState(false);
   const [isCollapsed, updateIsCollapsed] = useState(false);
 
   useEffect(() => {
     updateCityCountries(loc);
+    updateAnchorLinks(getAnchorLinksData(loc));
     // Since the filter function might become heavy with n number of calls, we are
     // adding debouncing to reduce the load on js thread
     optimizedHandler.currnet = limitTheNumberOfCalls(onSearchHandler, 200);
   }, []);
   const onSearchHandler = (searchParam) => {
-    updateCityCountries(filterCitiesAndCountries(loc, searchParam));
+    const {filteredCountries, updatedAnchorLinks} = filterCitiesAndCountries(loc, searchParam)
+    updateCityCountries(filteredCountries);
+    updateAnchorLinks(updatedAnchorLinks);
   };
   const onIconsClickHandler = (selectedElementVal) => {
     switch (selectedElementVal) {
@@ -49,7 +54,6 @@ function App() {
         break;
     }
   };
-
   const onCheckboxChangeHandler = (selectedElement) => {
     const elementId = selectedElement.target.value;
     updateSelectedLoc({
@@ -74,16 +78,20 @@ function App() {
       {!isMinimised && !isCollapsed && (
         <>
           <MemoizedSearchBox onSearchHandler={optimizedHandler.currnet} />
-          <ClearAllSelection clearSelectionHandler={clearSelectionHandler} />
-          <div className="listItems">
-            <div>
-              <ListItems
-                cityCountries={cityCountries}
-                onCheckboxChangeHandler={onCheckboxChangeHandler}
-                selectedLoc={selectedLoc}
-              />
+          <div className="parentInteractor">
+            <div className="clearSecAndList">
+              <ClearAllSelection clearSelectionHandler={clearSelectionHandler} />
+              <div className="listItems">
+                <div>
+                  <ListItems
+                    cityCountries={cityCountries}
+                    onCheckboxChangeHandler={onCheckboxChangeHandler}
+                    selectedLoc={selectedLoc}
+                  />
+                </div>
             </div>
-            <div>{/* <AlphabetList alphabets={alphabets} /> */}</div>
+          </div>
+          <AnchorLinkList anchorLinks={anchorLinks}/>
           </div>
         </>
       )}

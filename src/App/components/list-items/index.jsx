@@ -17,20 +17,23 @@ export const ListItems = ({
   const isCheckboxSelected = (elementId) => {
     return !!selectedLoc[elementId];
   };
-
   return (
     <ul onChange={onCheckboxChangeHandler}>
-      {cityCountries.map((cityCountry) => (
+    {cityCountries.map((cityCountry) => {
+      const city = cityCountry.city ? cityCountry.city : "Not Provided";
+      return(
         <li key={cityCountry.id}>
           <input
             type="checkbox"
             value={cityCountry.id}
             checked={isCheckboxSelected(cityCountry.id)}
           />
-          {cityCountry.city ? cityCountry.city : "Not Provided"}
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+          <a name={city}>{city}</a>
+          
           {cityCountry.country ? `- ${cityCountry.country}` : ""}
         </li>
-      ))}
-    </ul>
+    )})}
+  </ul>
   );
 };
